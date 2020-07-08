@@ -1,26 +1,59 @@
-@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oleo+Script&display=swap');
 
-body 
+
+
+html,body
 {
-    font-family: 'Indie Flower', cursive;
-    margin-top: 100px;
+    height: 100%;
 }
+
+.footer
+{
+    position:absolute;
+    margin-bottom: -120px;
+    bottom: 0;
+}
+
+.rsociaux
+{
+    font-size: 30px;
+    color:white;
+}
+
+body
+{
+    font-family: 'Fira Sans', sans-serif;
+    margin-top: 100px;
+    min-height: 80vh;
+    position:relative;
+}
+
+
 
 /* Navbar */
 .logo
 {
-   width:120px; 
-   margin-right: 60px;
+    font-family: 'Oleo Script', cursive;
+    font-size: 35px;
+   margin-right: 30px;
+   color:#c07171;
+}
+
+.logo:hover
+{
+    color:#c07171;
+    text-decoration: none;
 }
 
 .btnrecherche
 {
-    background: #FE65D8; 
+    background: #FA8072; 
 }
 
 .inpbtnrecherche
 {
-    margin-left: 160px;  
+    margin-left: 120px;  
 }
 
 .btn1
@@ -29,10 +62,18 @@ body
     color: white;
 }
 
+#dropdownMenuLink
+{
+    border:none;
+    color: white;
+    margin-bottom: -20px;
+
+}
+
 ion-icon
 {
     font-size: 30px;
-    color:#FE65D8;
+    color:#FA8072;
     margin-bottom: -11px;
 }
 
@@ -43,21 +84,13 @@ ion-icon
 
 h1
 {
-    color:#FE65D8;
+    color:#BC8F8F;
 }
 
-.citation
+.images
 {
-    font-weight: 20px;
-    margin-top: -20px;
+    width:80px;
 }
-.auteur
-{
-    margin-left: 40px;
-    color:#FE65D8;
-}
-
-
 
 /* Carousel */
 .carousel-item > img {
@@ -70,7 +103,7 @@ h1
 
 .btn
 {
-    background: #FE65D8;
+    background: #FA8072;
 }
 
 
@@ -79,8 +112,8 @@ h1
     margin-top:-750px;
 }
 
-.btndepan
+.btndepan, .btnfemme
 {
-    margin-top:-770px;
+    margin-top:-720px;
 }
 
