@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Annonce;
+use App\Entity\Categorie;
 use App\Form\AnnonceType;
 use App\Repository\AnnonceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,6 +23,23 @@ class AnnonceController extends AbstractController
     {
         return $this->render('annonce/index.html.twig', [
             'annonces' => $annonceRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * Afficher les annonces par catégorie
+     * @Route("/categorie/{id}", name="annonce_categorie", methods={"GET"})
+     * @param Categorie $categorie
+     * @return Response
+     */
+    public function categorie(Categorie $categorie)
+    {
+        # Récupération des annonces de la categorie
+        $annonces = $categorie->getAnnonces();
+
+        # Transmission a la vue.
+        return $this->render('annonce/index.html.twig', [
+            'annonces' => $annonces,
         ]);
     }
 
