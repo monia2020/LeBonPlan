@@ -4,10 +4,10 @@
 
 {% block body %}
     <div class="container">
-        <h1 class="mb-5">Modifier mes informations : </h1>
-        {{ form(form)}}
-
-        <button class="btn"><a href="{{ path('user')}}" class="text-white">Annuler</a></button>
-
+        <h1 class=" text-center mb-5">Modifier mes informations : </h1>
+        <div class="col-10 mx-5">
+            {{ form(form)}}
+            <a href="{{ path('user')}}" class="btn text-white">Annuler</a>
+        </div>
     </div>
 {% endblock %}

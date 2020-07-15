@@ -1,4 +1,11 @@
+
+
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn text-white">{{ button_label|default('Save') }}</button>
+    <div class="col-10 mx-5">
+        {{ form_widget(form) }}
+    </div>
+    <div class="row my-5">
+        <a href="{{ path('annonce_index') }}" class="btn text-white"><ion-icon class="chevron" name="chevron-back-outline"></ion-icon>Retour à la liste</a>
+        <button class="btn text-white contact">{{ button_label|default('Enregistrer') }}</button>
+    </div>
 {{ form_end(form) }}

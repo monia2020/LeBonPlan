@@ -1,11 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital@1&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Oleo+Script&display=swap');
-
-
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans&display=swap');
 
 html,body
 {
-    min-height: 80vh;
+    min-width: 80vh;
+    font-size: 13px;
 }
 
 .footer
@@ -23,7 +22,7 @@ html,body
 
 body
 {
-    font-family: 'Fira Sans', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     margin-top: 100px;
     min-height: 80vh;
     position:relative;
@@ -38,26 +37,21 @@ ul li
 /* Navbar */
 .logo
 {
-    font-family: 'Oleo Script', cursive;
-    font-size: 35px;
-   margin-right: 10px;
-   color:#c07171;
+    font-family: 'Do Hyeon', sans-serif;
+    font-weight: bold;
+    font-size: 28px;
+   color:#0489B1;
 }
 
 .logo:hover
 {
-    color:#c07171;
+    color:#01A9DB;
     text-decoration: none;
-}
-
-.btnrecherche
-{
-    background: #FA8072; 
 }
 
 .inpbtnrecherche
 {
-    margin-left: 80px;  
+    margin-left: 31px;  
 }
 
 .btn1
@@ -68,9 +62,9 @@ ul li
 
 ion-icon
 {
-    font-size: 30px;
-    color:#FA8072;
-    margin-bottom: -11px;
+    font-size: 20px;
+    color:#0489B1;
+    margin-bottom: -5px;
 }
 
 .user a
@@ -80,25 +74,26 @@ ion-icon
 
 h1
 {
-    color:#BC8F8F;
+    color:#20B2AA;
+    font-weight:bold;
 }
 
 .prix
 {
-    color:#CD5C5C;
+    color:#20B2AA;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 28px;
 }
 
-.titreannonce
+/* .titreannonce
 {
     font-size: 25px;
-
-}
+} */
 
 .images
 {
-    width:80px;
+    width:200px;
+    margin-left: 80px;
 }
 
 /* Carousel */
@@ -117,21 +112,86 @@ h1
 
 .btn
 {
-    background: #FA8072;
+    background: #0489B1;
 }
 
-/*Politique de confidentialité*/
-
-h1{
-    color:#20B2AA;
-}
-
-h3
+h3,h5
 {
-    color:#0489B1;
+    color:#708090;
+    font-weight: bold;
+}
+
+a
+{
+    color:grey;
+}
+
+.login
+
+{
+    margin-left: 320px;
+}
+
+.contact
+{
+    margin-left: 380px;
+}
+
+.msg,.chevron
+{
+    color:white;
+}
+
+.btnprofil
+{
+    margin-left: 650px;
+}
+
+.form
+{
+    margin-left: 560px;;
 }
 
 /*a propos*/
-.rounded{
+.rounded
+{
     margin-left:300px;
+}
+
+
+/* Responsive */
+
+@media screen and (max-width: 1250px) 
+{
+    .logo
+    {
+      font-size:20px;
+      margin:0;
+    }
+
+    .user ul
+    {
+        padding:0;
+        margin:0;
+        margin-left: -120px;
+    }
+    .inpbtnrecherche
+    {
+        margin-left: 0;
+        max-height: 30px; 
+    }
+
+    ion-icon
+    {
+        font-size: 20px;
+        margin-bottom: -8px;
+    }
+
+    ul a,.btnrecherche
+    {
+        font-size: 12px;
+    }
+
+    
+  
 }

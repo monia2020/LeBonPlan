@@ -10,6 +10,7 @@ use App\Repository\AnnonceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -120,6 +121,44 @@ class AnnonceController extends AbstractController
             $entityManager->remove($annonce);
             $entityManager->flush();
         }
+
+        return $this->redirectToRoute('annonce_index');
+    }
+
+    /**
+     * @Route("/favoris/ajout/{id}", name="ajout_favoris")
+     */
+    public function ajoutFavoris(Annonce $annonce)
+    {
+        if(!$annonce)
+        {
+            throw new NotFoundHttpException('Pas d\'annonce trouvée');
+        }
+
+        $annonce->addFavori($this->getUser());
+        
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($annonce);
+            $entityManager->flush();
+
+        return $this->redirectToRoute('annonce_index');
+    }
+
+        /**
+     * @Route("/favoris/retrait/{id}", name="retrait_favoris")
+     */
+    public function retraitFavoris(Annonce $annonce)
+    {
+        if(!$annonce)
+        {
+            throw new NotFoundHttpException('Pas d\'annonce trouvée');
+        }
+
+        $annonce->removeFavori($this->getUser());
+        
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($annonce);
+            $entityManager->flush();
 
         return $this->redirectToRoute('annonce_index');
     }

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AnnonceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -69,9 +71,15 @@ class Annonce
      */
     private $user;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="favoris")
+     */
+    private $favoris;
+
     public function __construct()
     {
         return $this->created_at = new \DateTime();
+        $this->favoris = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -190,4 +198,29 @@ class Annonce
         return $this->titre;
     }
 
+    /**
+     * @return Collection|User[]
+     */
+    public function getFavoris(): Collection
+    {
+        return $this->favoris;
+    }
+
+    public function addFavori(User $favori): self
+    {
+        if (!$this->favoris->contains($favori)) {
+            $this->favoris[] = $favori;
+        }
+
+        return $this;
+    }
+
+    public function removeFavori(User $favori): self
+    {
+        if ($this->favoris->contains($favori)) {
+            $this->favoris->removeElement($favori);
+        }
+
+        return $this;
+    }
 }

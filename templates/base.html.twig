@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}Bienvenue!{% endblock %}</title>
         {% block stylesheets %}
             <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css')}}">
@@ -27,9 +28,9 @@
                             <li class="nav-item active">
                                 <a class="nav-link" href="{{ path("annonce_new") }}"><ion-icon name="add-circle-outline"></ion-icon>Déposer une annonce</a>
                             </li>
-                            <form  method="get" action="{{ path('search_query') }}" class="form-inline inpbtnrecherche  mt-2 mt-md-0">
-                                <input name="q" class="form-control mr-sm-2" type="text" placeholder="Bonne affaire..." aria-label="Search">
-                                <button class="btn text-white btnrecherche font-weight-bold my-2 my-sm-0" type="submit">Dénicher</button>
+                            <form  method="get" action="{{ path('search_query') }}" class="form-inline  mt-2 mt-md-0">
+                                <input name="q" class="form-control inpbtnrecherche col-sm-6 mr-1" type="text" placeholder="Bonne affaire..." aria-label="Search">
+                                <button class="btn text-white btnrecherche font-weight-bold my-sm-0" type="submit">Dénicher</button>
                             </form>
                         </ul>                 
                     </div>
@@ -43,7 +44,7 @@
                                     <a href="{{path('app_logout')}}" class="font-weight-bold nav-link"><ion-icon name="person-remove-outline"></ion-icon>Déconnexion</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="font-weight-bold nav-link"><ion-icon name="heart-circle-outline"></ion-icon>Favoris</a>
+                                    <a href="#" class="font-weight-bold nav-link"><ion-icon name="heart"></ion-icon>Mes favoris</a>
                                 </li>
                             {% else %}
                                 <li class="nav-item">
@@ -79,11 +80,11 @@
          {% block footer %}
             <div class="container-fluid footer bg-dark font-weight-bold text-light text-center py-3">
                 <div class="dropdown show mb-3">
-                    {# <a class="mx-5 btn1" href="{{ path('contact_index')}}">Contactez-nous</a> #}
+                    <a class="mx-5 btn1" href="{{ path('contact')}}">Contactez-nous</a>
                     <a class="btn1 dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">A propos</a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <a class="dropdown-item" href="{{ path("confidentialite") }}">Politique de confidentialité</a>
-                        <a class="dropdown-item" href="{{path("propos") }}">A propos de Vidressing</a>
+                        <a class="dropdown-item" href="{{path("propos") }}">A propos de LeBonPlan</a>
                         <a class="dropdown-item" href="{{path("cookies") }}">Cookies</a>
                     </div>
                 </div>
@@ -94,7 +95,7 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        &copy <?php echo date('Y') ?> - Vidressing - Tous droits réservés
+                        &copy <?php echo date('Y') ?> - LeBonPlan - Tous droits réservés
                     </div>
                 </div>
             </div>     

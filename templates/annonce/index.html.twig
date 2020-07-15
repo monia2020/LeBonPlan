@@ -4,54 +4,64 @@
 
 {% block body %}
     <div class="container">
+        <a href="{{ path('annonce_new') }}" class="button btn text-right text-white">Déposer une annonce</a>
         <h1 class="text-center mb-4">Liste des annonces</h1>
-
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Titre</th>
-                    <th>Date de publication</th>
-                    <th>Prix</th>
-                    <th>Type</th>
-                    <th>Categorie</th>
-                    <th>Image</th>
-                    <th>Description</th>
-                    <th>actions</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for annonce in annonces %}
-                <tr>
-                    <td>{{ annonce.id }}</td>
-                    <td>{{ annonce.titre }}</td>
-                    <td>{{ annonce.createdAt ? annonce.createdAt|date('Y-m-d') : '' }}</td>
-                    <td>{{ annonce.prix }}</td>
-                    <td>{{ annonce.type }}</td>
-                    <td>{{ annonce.categorie}}</td>
-                    <td>
-                        <img src="{{ asset('uploads/images/annonces/')}}{{ annonce.image }}" class="images">
-                    </td>
-                    <td>{{ annonce.description }}</td>
-                    <td>
-
-                        <a href="{{ path('annonce_show', {'id': annonce.id}) }}">Afficher</a>
-
-                        {% if is_granted('IS_AUTHENTICATED_FULLY') and user.id == annonce.user.id %}
-                            <a href="{{ path('annonce_edit', {'id': annonce.id}) }}" class="mx-3">Modifier</a>
-                            <a href="{{ path('annonce_delete', {'id': annonce.id}) }}">Supprimer</a>
-                        {% endif %}
-
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="7">Pas encore d'annonce</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-
-        <a href="{{ path('annonce_new') }}">Déposer une annonce</a>
+        {% for annonce in annonces %}
+            <div class="card mb-3" style="max-height: 300px;">
+                <div class="row">
+                    <div class="col-md-4 mt-3">
+                        <img src="{{ asset('uploads/images/annonces/')}}{{ annonce.image }}" class="images" style="max-height: 200px;">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-4">
+                                    <h4 class="mb-2"><a href="{{ path('annonce_show', {'id': annonce.id}) }}">{{ annonce.titre }}</a></h4>
+                                    <p class="mb-3 text-warning font-weight-bold">Type: {{ annonce.type }}</p>
+                                </div>
+                                <div class="col-4">
+                                    {% if is_granted("ROLE_USER") and user.id != annonce.user.id %}
+                                        {% for favoris in annonce.favoris %}
+                                            {% if favoris.id == app.user.id %}
+                                                <a href="{{ path('retrait_favoris', {id: annonce.id}) }}"><ion-icon name="heart"></ion-icon>En favoris</a>
+                                            {% else %}
+                                                <a href="{{ path('ajout_favoris', {id: annonce.id}) }}"><ion-icon name="heart-outline"></ion-icon>ajouter aux Favoris</a>
+                                            {% endif %}
+                                        {% else %}
+                                            <a href="{{ path('ajout_favoris', {id: annonce.id}) }}"><ion-icon name="heart-outline"></ion-icon>ajouter aux Favoris</a> 
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <div class="col-4">
+                                    <p class="text-right prix">{{ annonce.prix }}€</p>
+                                </div>
+                            </div>
+                                <p class="card-text">{{ annonce.description }}</p>
+                            <div class="row">
+                                <div class="col-3 mt-5">
+                                    <p class="text-info"><strong>Catégorie: {{ annonce.categorie }}</strong></p>
+                                </div>
+                                <div class="col-2 mt-5">
+                                    <a href="{{ path('annonce_show', {'id': annonce.id}) }}" class="button btn text-white">Voir</a>
+                                </div>
+                                {% if is_granted('IS_AUTHENTICATED_FULLY') and user.id == annonce.user.id %}
+                                    <div class="col-2 mt-5">
+                                        <a href="{{ path('annonce_edit', {'id': annonce.id}) }}" class="button btn text-white">Modifier</a>
+                                    </div>
+                                    <div class="col-2 mt-5">
+                                       {{ include('annonce/_delete_form.html.twig') }}
+                                    </div>
+                                {% endif %}
+                                <div class="col-3">
+                                    <p class="text-right mt-5"><small class="text-muted"></small>{{ annonce.createdAt ? annonce.createdAt|date('d-m-Y') : '' }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <p>Pas encore d'annonce</p>     
+        {% endfor %}
     </div>
 {% endblock %}

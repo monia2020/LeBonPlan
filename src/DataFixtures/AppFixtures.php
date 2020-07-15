@@ -33,6 +33,8 @@ class AppFixtures extends Fixture
         $password = $this->encoder->encodePassword($user, 'pass_1234');
         $user->setPassword($password);
 
+
+
         $user2 = new User();
         $user2->setPseudo('admin2');
         $user2->setEmail('admin2@test.fr');
@@ -42,6 +44,7 @@ class AppFixtures extends Fixture
         $password = $this->encoder->encodePassword($user2, 'pass_1234');
         $user2->setPassword($password);
 
+
         $user3 = new User();
         $user3->setPseudo('user');
         $user3->setEmail('user@test.fr');
@@ -49,17 +52,29 @@ class AppFixtures extends Fixture
         $user3->setAdresse('Marseille');
         
 
-        
-
         $password = $this->encoder->encodePassword($user3, 'pass_1234');
         $user3->setPassword($password);
+
+
+        $user4 = new User();
+        $user4->setPseudo('user2');
+        $user4->setEmail('user2@test.fr');
+        $user4->setRoles(['ROLE_USER']);
+        $user4->setAdresse('Nantes');
+        
+
+        $password = $this->encoder->encodePassword($user4, 'pass_1234');
+        $user4->setPassword($password);
+
 
         // $product = new Product();
         $manager->persist($user);
         $manager->persist($user2);
         $manager->persist($user3);
+        $manager->persist($user4);
 
         $this->addReference('user', $user3);
+        $this->addReference('user2', $user4);
 
 
         /** Partie Catégorie **/
@@ -111,6 +126,16 @@ class AppFixtures extends Fixture
         $manager->persist($annonce);
         $annonce->setUser($this->getReference('user'));
         
+        $annonce8 = new Annonce();
+        $annonce8->setTitre('Talons Noir');
+        $annonce8->setCreatedAt(new \Datetime());
+        $annonce8->setType('offre');
+        $annonce8->setPrix(20);
+        $annonce8->setCategorie($this->getReference('categorie1'));
+        $annonce8->setImage('talon.jpeg');
+        $annonce8->setDescription("Portés une seule fois");
+        $manager->persist($annonce8);
+        $annonce8->setUser($this->getReference('user2'));
 
         $annonce1 = new Annonce();
         $annonce1->setTitre('Sandale bleu');
@@ -133,6 +158,18 @@ class AppFixtures extends Fixture
         $annonce2->setDescription('en bon etat');
         $manager->persist($annonce2);
         $annonce2->setUser($this->getReference('user'));
+        
+        $annonce10 = new Annonce();
+        $annonce10->setTitre('Robe');
+        $annonce10->setCreatedAt(new \Datetime());
+        $annonce10->setType('offre');
+        $annonce10->setPrix(12);
+        $annonce10->setCategorie($this->getReference('categorie1'));
+        $annonce10->setImage('robefleuri.jpg');
+        $annonce10->setDescription("Robe fleurie femme");
+        $manager->persist($annonce10);
+        $annonce10->setUser($this->getReference('user'));
+
 
         $annonce3 = new Annonce();
         $annonce3->setTitre('Peinture');
@@ -166,6 +203,40 @@ class AppFixtures extends Fixture
         $annonce5->setDescription("Chemise Hugo Boss, taille M slim fit, parfait état");
         $manager->persist($annonce5);
         $annonce5->setUser($this->getReference('user'));
+
+
+        $annonce6 = new Annonce();
+        $annonce6->setTitre('Sac à main noir');
+        $annonce6->setCreatedAt(new \Datetime());
+        $annonce6->setType('offre');
+        $annonce6->setPrix(60);
+        $annonce6->setCategorie($this->getReference('categorie1'));
+        $annonce6->setImage('sacamain.jpg');
+        $annonce6->setDescription("Sac à Main Grand Noir crocodile Femme en cuir Haute capacité, il est parfait pour printemps, Eté, automne, hiver");
+        $manager->persist($annonce6);
+        $annonce6->setUser($this->getReference('user2'));
+
+        $annonce7 = new Annonce();
+        $annonce7->setTitre('Pyjama bébé fille');
+        $annonce7->setCreatedAt(new \Datetime());
+        $annonce7->setType('offre');
+        $annonce7->setPrix(6);
+        $annonce7->setCategorie($this->getReference('categorie2'));
+        $annonce7->setImage('pyjama.jpg');
+        $annonce7->setDescription("Pyjama 6 mois fille marque noukies ,en excellente etat");
+        $manager->persist($annonce7);
+        $annonce7->setUser($this->getReference('user2'));
+
+        $annonce9 = new Annonce();
+        $annonce9->setTitre('Montre');
+        $annonce9->setCreatedAt(new \Datetime());
+        $annonce9->setType('offre');
+        $annonce9->setPrix(5);
+        $annonce9->setCategorie($this->getReference('categorie1'));
+        $annonce9->setImage('montre.jpeg');
+        $annonce9->setDescription("Montre femme");
+        $manager->persist($annonce9);
+        $annonce9->setUser($this->getReference('user2'));
 
 
         $manager->flush();

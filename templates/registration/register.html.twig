@@ -8,17 +8,41 @@
             <div class="alert alert-danger" role="alert">{{ flashError }}</div>
         {% endfor %}
 
-        <h1 class="text-center">Inscrivez-vous</h1>
-
+        <h1 class="text-center mb-5">Inscrivez-vous</h1>
+        <div class="login">
         {{ form_start(registrationForm) }}
-            {{ form_row(registrationForm.pseudo) }}
-            {{ form_row(registrationForm.email) }}
-            {{ form_row(registrationForm.adresse) }}
-            {{ form_row(registrationForm.plainPassword, {
-                label: 'Password'
-            }) }} 
-
-            <button type="submit" class="btn text-white">Enregistrer</button>
-        {{ form_end(registrationForm) }}
+            <div class="form-row">
+                <div class="form-group col-md-8">
+                    <label >Pseudo</label>
+                    {{ form_widget(registrationForm.pseudo, {'attr':{'placeholder':'Pseudo', 'class':'form-control'}}) }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-8">
+                    <label for="inputEmail4">Email</label>
+                    {{ form_widget(registrationForm.email, {'attr':{'placeholder':'Email', 'class':'form-control'}}) }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-8">
+                    <label >adresse</label>
+                    {{ form_widget(registrationForm.adresse, {'attr':{'placeholder':'Adresse', 'class':'form-control'}}) }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-8">
+                    <label >Mot de passe</label>
+                    {{ form_widget(registrationForm.plainPassword, {'attr':{'placeholder':'Mot de passe', 'class':'form-control'}}) }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-check">
+                    <label class="form-check-label">Accepter les conditions d'utilisations</label>
+                    {{ form_widget(registrationForm.agreeTerms, {'attr':{'class':'form-check-input'}}) }}
+                </div>
+            </div>
+            <button type="submit" class="btn text-white mt-4">Valider</button>
+            {{ form_end(registrationForm) }}
+        </div>
     </div>
 {% endblock %}

@@ -1,13 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Annonce{% endblock %}
+{% block title %}Modifier l'annonce{% endblock %}
 
 {% block body %}
     <div class="container">
-        <h1 class="text-center">Edit Annonce</h1>
+        <h1 class="text-center mb-5">Modifier l'annonce</h1>
 
-        {{ include('annonce/_form.html.twig', {'button_label': 'Update'},{'class': 'text-white'}) }}
+        {{ include('annonce/_form.html.twig', {'button_label': 'Enregistrer'},{'class': 'text-white'}) }}
 
-        <a href="{{ path('annonce_index') }}">back to list</a>
     </div>
 {% endblock %}

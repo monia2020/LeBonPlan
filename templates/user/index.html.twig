@@ -7,34 +7,62 @@
 
         <h1 class="mb-5">Mes informations : </h1>
         
-        <div>
-            <table class="table">
-                <tbody>
-                    <tr>
-                        <th>Pseudo</th>
-                        <td>{{ app.user.pseudo }}</td>
-                    </tr>
-                    <tr>
-                        <th>Email</th>
-                        <td>{{ app.user.email }}</td>
-                    </tr>
-                    <tr>
-                        <th>Adresse</th>
-                        <td>{{ app.user.adresse }}</td>
-                    </tr>
-                </tbody>
-            </table>
-            <a href="{{ path('user_modifier')}}">Modifier le profil</a>
-            <a href="{{ path('user_pass_modifier')}}">Modifier le mot de passe</a>
+        <div class="row">
+            <div class="col-6">
+                <img src="{{ asset('uploads/images/annonces/profil.png')}}" alt="image profile">
+            </div>
+            <div class="col-6">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>Pseudo</th>
+                            <td>{{ app.user.pseudo }}</td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td>{{ app.user.email }}</td>
+                        </tr>
+                        <tr>
+                            <th>Adresse</th>
+                            <td>{{ app.user.adresse }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-
-        <h1 class="mb-5">Mes annonces ({{ app.user.annonces|length }}) </h1>
+        <div class="row mt-5 btnprofil">
+            <a href="{{ path('user_modifier')}}" class="btn text-white mx-3">Modifier le profil</a>
+            <a href="{{ path('user_pass_modifier')}}" class="btn text-white">Modifier le mot de passe</a>
+        </div>
+        <h1 class="mb-5 mt-5">Mes annonces ({{ app.user.annonces|length }}) </h1>
         {% for annonce in app.user.annonces %}
-            <p>Titre: <a href="{{ path('annonce_show', {'id': annonce.id}) }}">{{ annonce.titre }}</a></p>
-            {% else %}
-                <tr>
-                    <p>Pas encore d'annonce en ligne</p>
-                </tr>            
+            <div class="row mb-5">
+                <div class="col-4">
+                    <img src="{{ asset('uploads/images/annonces/')}}{{ annonce.image }}" style="max-height: 100px;" class="ml-5">
+                </div>
+                <div class="col-8">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th>Annonce : </th>
+                                <td><h4><a href="{{ path('annonce_show', {'id': annonce.id}) }}">{{ annonce.titre }}</a></h4></td>
+                            </tr>
+                            <tr>
+                                <th>Publiée le </th>
+                                <td>{{ annonce.createdAt ? annonce.createdAt|date('d-m-Y') : '' }}</td>
+                            </tr>
+                            <tr>
+                                <th>Prix</th>
+                                <td>{{ annonce.prix }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        {% else %}
+            <tr>
+                <p>Pas d'annonce en ligne</p>
+            </tr>            
         {% endfor %}
 
     </div>
