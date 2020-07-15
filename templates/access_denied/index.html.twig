@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accès refusé{% endblock %}
+
+{% block body %}
+
+    <div class="container text-justify">
+        <div class="alert alert-danger" role="alert">
+        <p class="text-center mb-5">Vous ne dénicherez rien par ici <br/>
+        <a href="{{ path('acceuil')}}">Je vous raccompagne à la page d'accueil</a>
+        </p>
+            <img class="container text-justify" src="{{ asset('images/access_denied.png')}}">
+        </div>
+    </div>
+{% endblock %}

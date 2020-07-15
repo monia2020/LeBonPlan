@@ -1,0 +1,29 @@
+easy_admin:
+     site_name: '<img src="../images/logo.png"/>'
+     entities:
+        User:
+            class: App\Entity\User
+        Annonce:
+            class: App\Entity\Annonce
+        Categorie:
+            class: App\Entity\Categorie 
+
+    
+     design:
+        menu:
+          - label: 'Back'
+            icon: 'newspaper-o'
+            children: 
+        # only users with the ROLE_SUPER_ADMIN role will see this menu item
+                - { entity: 'User', permission: 'ROLE_ADMIN', css_class: 'menu--user ', icon: 'user'}
+                - { entity: 'Annonce', css_class: 'menu--user', icon: 'tag', default: true }
+                - { entity: 'Categorie', css_class: 'menu--user', icon: 'star', default: true  }
+        brand_color: '#0489B1'
+          
+     list:
+        actions:
+            # hides the action label and displays only the icon
+            - { name: 'edit', icon: 'pencil', label: false }
+            # hides the action label and displays only the icon
+            - { name: 'delete', icon: 'trash', label: false }
+   

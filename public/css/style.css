@@ -5,13 +5,13 @@
 
 html,body
 {
-    height: 100%;
+    min-height: 80vh;
 }
 
 .footer
 {
     position:absolute;
-    margin-bottom: -120px;
+    margin-bottom: -180px;
     bottom: 0;
 }
 
@@ -29,14 +29,18 @@ body
     position:relative;
 }
 
-
+ul li
+{
+    list-style: none;
+    display: inline-block;
+}
 
 /* Navbar */
 .logo
 {
     font-family: 'Oleo Script', cursive;
     font-size: 35px;
-   margin-right: 30px;
+   margin-right: 10px;
    color:#c07171;
 }
 
@@ -53,21 +57,13 @@ body
 
 .inpbtnrecherche
 {
-    margin-left: 120px;  
+    margin-left: 80px;  
 }
 
 .btn1
 {
     border:none;
     color: white;
-}
-
-#dropdownMenuLink
-{
-    border:none;
-    color: white;
-    margin-bottom: -20px;
-
 }
 
 ion-icon
@@ -87,6 +83,19 @@ h1
     color:#BC8F8F;
 }
 
+.prix
+{
+    color:#CD5C5C;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.titreannonce
+{
+    font-size: 25px;
+
+}
+
 .images
 {
     width:80px;
@@ -101,19 +110,28 @@ h1
     height: 32rem;
   }
 
+.imgpub
+{
+    width:200px;
+}
+
 .btn
 {
     background: #FA8072;
 }
 
+/*Politique de confidentialité*/
 
-.btnbebe
-{
-    margin-top:-750px;
+h1{
+    color:#20B2AA;
 }
 
-.btndepan, .btnfemme
+h3
 {
-    margin-top:-720px;
+    color:#0489B1;
 }
 
+/*a propos*/
+.rounded{
+    margin-left:300px;
+}

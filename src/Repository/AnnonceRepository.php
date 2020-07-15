@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Annonce;
+
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -19,20 +20,21 @@ class AnnonceRepository extends ServiceEntityRepository
         parent::__construct($registry, Annonce::class);
     }
 
-    /**
+   /**
      * @param string $searchTerm
      * @return Annonce[] Returns an array of Annonce objects
      */
     public function findBySearchTerm(string $searchTerm)
     {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.titre LIKE :titre')
-            ->setParameter('titre', "%$searchTerm%")
-            ->orderBy('a.id', 'DESC')
+        ->andWhere('a.titre LIKE :titre')
+        ->setParameter('titre', "%$searchTerm%")
+        ->orderBy('a.id', 'DESC')
             ->getQuery()
             ->getResult()
         ;
     }
+    
 
     /*
     public function findOneBySomeField($value): ?Annonce

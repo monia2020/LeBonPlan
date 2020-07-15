@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Annonce;
 use App\Entity\Categorie;
+
 use App\Form\AnnonceType;
 use App\Repository\AnnonceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,6 +24,7 @@ class AnnonceController extends AbstractController
     {
         return $this->render('annonce/index.html.twig', [
             'annonces' => $annonceRepository->findAll(),
+            'user' =>$this->getUser(),
         ]);
     }
 
@@ -48,14 +50,26 @@ class AnnonceController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        if( !$this->getUser())
+        {
+            $this->addFlash('error','Vous devez etre connecter pour acceder a cette page');
+
+            return $this->redirectToRoute('app_login');
+        }
+
         $annonce = new Annonce();
+        $annonce->setUser($this->getUser());
         $form = $this->createForm(AnnonceType::class, $annonce);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($annonce);
+
+
             $entityManager->flush();
+
+            $this->addFlash('message','Votre annonce est en ligne');
 
             return $this->redirectToRoute('annonce_index');
         }

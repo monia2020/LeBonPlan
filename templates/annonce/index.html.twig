@@ -11,10 +11,12 @@
                 <tr>
                     <th>Id</th>
                     <th>Titre</th>
+                    <th>Date de publication</th>
                     <th>Prix</th>
                     <th>Type</th>
-                    <th>Description</th>
+                    <th>Categorie</th>
                     <th>Image</th>
+                    <th>Description</th>
                     <th>actions</th>
                 </tr>
             </thead>
@@ -23,15 +25,23 @@
                 <tr>
                     <td>{{ annonce.id }}</td>
                     <td>{{ annonce.titre }}</td>
+                    <td>{{ annonce.createdAt ? annonce.createdAt|date('Y-m-d') : '' }}</td>
                     <td>{{ annonce.prix }}</td>
                     <td>{{ annonce.type }}</td>
-                    <td>{{ annonce.description }}</td>
+                    <td>{{ annonce.categorie}}</td>
                     <td>
                         <img src="{{ asset('uploads/images/annonces/')}}{{ annonce.image }}" class="images">
                     </td>
+                    <td>{{ annonce.description }}</td>
                     <td>
+
                         <a href="{{ path('annonce_show', {'id': annonce.id}) }}">Afficher</a>
-                        <a href="{{ path('annonce_edit', {'id': annonce.id}) }}">Modifier</a>
+
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') and user.id == annonce.user.id %}
+                            <a href="{{ path('annonce_edit', {'id': annonce.id}) }}" class="mx-3">Modifier</a>
+                            <a href="{{ path('annonce_delete', {'id': annonce.id}) }}">Supprimer</a>
+                        {% endif %}
+
                     </td>
                 </tr>
             {% else %}

@@ -1,20 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProposController!{% endblock %}
+{% block title %}A propos{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+ <div class="container text-justify">
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/vidressing/src/Controller/ProposController.php'|file_link(0) }}">src/Controller/ProposController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/vidressing/templates/propos/index.html.twig'|file_link(0) }}">templates/propos/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <h1 class="text-center mb-5">Tu cherches une occazzz...c'est par <a href="{{ path('acceuil')}}">ici</a></h1>
+    <p class="text-center mb-5"> 
+    Le bon plan</br>
+    C'est l'endroit où dénicher des vêtements pour hommes, femmes, enfants.</br>
+    Tous ce qu'il te faut pour la maison... c'est ici</br>
+    Et Trouver quelqu'un de sympa pour de petits travaux pas chers...toujours ici
+    </p>
+    <img class="rounded" src="../images/servicedepannageapropos.jpg">
+    
+ </div>
 {% endblock %}

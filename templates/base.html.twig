@@ -7,13 +7,15 @@
             <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css')}}">
             <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css')}}">
             <link rel="stylesheet" type="text/css" href="{{ asset('css/carousel.css')}}">
+            <link rel="stylesheet" href="cookiealert.css">
+            
         {% endblock %}
     </head>
     <body>
         {% block header %}
             <div class="container">
                 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-                    <a href="{{ path("acceuil") }}" class="logo"><em>Vidressing</em></a>
+                    <a href="{{ path("acceuil") }}" class="logo"><em>LeBonPlan</em></a>
                     <div class="collapse navbar-collapse font-weight-bold mx-3" id="navbarCollapse">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item active">
@@ -25,31 +27,64 @@
                             <li class="nav-item active">
                                 <a class="nav-link" href="{{ path("annonce_new") }}"><ion-icon name="add-circle-outline"></ion-icon>Déposer une annonce</a>
                             </li>
-                            <form method="get" action="{{ path('search_query') }}" class="form-inline inpbtnrecherche  mt-2 mt-md-0">
+                            <form  method="get" action="{{ path('search_query') }}" class="form-inline inpbtnrecherche  mt-2 mt-md-0">
                                 <input name="q" class="form-control mr-sm-2" type="text" placeholder="Bonne affaire..." aria-label="Search">
                                 <button class="btn text-white btnrecherche font-weight-bold my-2 my-sm-0" type="submit">Dénicher</button>
                             </form>
                         </ul>                 
                     </div>
                     <div class="user">
-                       <a href="#" class="font-weight-bold"><ion-icon name="heart-circle-outline"></ion-icon>Favoris</a>
-                       <a href="#" class="font-weight-bold"><ion-icon name="person-circle-outline"></ion-icon>Connexion</a>
-                       <a href="#" class="font-weight-bold"><ion-icon name="people-circle-outline"></ion-icon>Inscription</a>
+                        <ul>
+                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                <li class="nav-item">
+                                    <a href="{{ path('user')}}" class="font-weight-bold nav-link">{{ app.user.pseudo }}</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{path('app_logout')}}" class="font-weight-bold nav-link"><ion-icon name="person-remove-outline"></ion-icon>Déconnexion</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="font-weight-bold nav-link"><ion-icon name="heart-circle-outline"></ion-icon>Favoris</a>
+                                </li>
+                            {% else %}
+                                <li class="nav-item">
+                                    <a href="{{path('app_login')}}" class="font-weight-bold nav-link"><ion-icon name="person-circle-outline"></ion-icon>Connexion</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{path('app_register')}}" class="font-weight-bold nav-link"><ion-icon name="person-add-outline"></ion-icon>Inscription</a>
+                                </li>
+                            {% endif %}                   
+                        
+                        </ul>
                     </div>
                 </nav>
+            
+                {% block flash %}
+                    {% for message in app.flashes('error') %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    {% for message in app.flashes('message') %}
+                        <div class="alert alert-success" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endblock %}
+
             </div>
         {% endblock %} 
-      </div>
+
+
         {% block body %}{% endblock %}
          {% block footer %}
             <div class="container-fluid footer bg-dark font-weight-bold text-light text-center py-3">
                 <div class="dropdown show mb-3">
-                    <a class="mx-5 btn1" href="#">Contactez-nous</a>
+                    {# <a class="mx-5 btn1" href="{{ path('contact_index')}}">Contactez-nous</a> #}
                     <a class="btn1 dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">A propos</a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <a class="dropdown-item" href="{{ path("confidentialite") }}">Politique de confidentialité</a>
-                        <a class="dropdown-item" href="{{path("confidentialite") }}">A propos de Vidressing</a>
-                        <a class="dropdown-item" href="#">Cookies</a>
+                        <a class="dropdown-item" href="{{path("propos") }}">A propos de Vidressing</a>
+                        <a class="dropdown-item" href="{{path("cookies") }}">Cookies</a>
                     </div>
                 </div>
                 <div class="mb-4">
@@ -74,7 +109,8 @@
             <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
             <script src="{{asset('js/bootstrap.min.js')}}"></script>
             <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-            <script src="{{ asset('js/holder.min.js')}}"></script>        
+            <script src="{{ asset('js/holder.min.js')}}"></script>
+            <script src="cookiealert-standalone.js"></script>       
         {% endblock %} 
     </body>
 </html>

@@ -33,6 +33,7 @@ class SearchController extends AbstractController
         # Affichage des resultats
         return $this->render('annonce/index.html.twig', [
             'annonces' => $annonces,
+            'user' =>$this->getUser(),
         ]);
     }
-}
+} 
