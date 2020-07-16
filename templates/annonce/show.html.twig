@@ -51,7 +51,7 @@
                 {% endfor %}
             {% endif %}
             
-            <a href="#" class="btn text-white contact"><ion-icon class="msg mr-2" name="mail-outline"></ion-icon>Envoyer un message au vendeur</a>
+            <a href="{{ path('message', {id: annonce.id}) }}" class="btn text-white contact"><ion-icon class="msg mr-2" name="mail-outline"></ion-icon>Envoyer un message au vendeur</a>
         </div>
     </div>
 {% endblock %}

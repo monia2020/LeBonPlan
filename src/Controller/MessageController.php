@@ -6,13 +6,14 @@ use App\Form\MessageType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Annonce;
 
 class MessageController extends AbstractController
 {
     /**
-     * @Route("/message", name="message")
+     * @Route("/message/{id}", name="message")
      */
-    public function index(Request $request, \Swift_Mailer $mailer)
+    public function index(Annonce $annonce, Request $request, \Swift_Mailer $mailer)
     {
         $form = $this->createForm(MessageType::class);
         $form->handleRequest($request);
@@ -27,12 +28,12 @@ class MessageController extends AbstractController
                 ->setFrom($contact['email'])
 
                 // On attribue le destinataire
-                ->setTo('getEmail')
+                ->setTo($annonce->getUser()->getEmail())
 
                 // On crée le message avec la vue Twig
                 ->setBody(
                     $this->renderView(
-                        'emails/message.html.twig', compact('message')
+                        'emails/contact.html.twig', compact('contact')
                     ),
                     'text/html'
                 )
@@ -47,7 +48,8 @@ class MessageController extends AbstractController
 
         }
         return $this->render('message/index.html.twig', [
-            'messageForm' => $form->CreateView()
+            'messageForm' => $form->CreateView(),
+            'annonce' => $annonce
         ]);
     }
 }
