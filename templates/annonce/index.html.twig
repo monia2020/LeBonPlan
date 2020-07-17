@@ -4,13 +4,13 @@
 
 {% block body %}
     <div class="container">
-        <a href="{{ path('annonce_new') }}" class="button btn text-right text-white">Déposer une annonce</a>
+        <a href="{{ path('annonce_new') }}" class="button btn btnnew text-right text-white">Déposer une annonce</a>
         <h1 class="text-center mb-4">Liste des annonces</h1>
         {% for annonce in annonces %}
             <div class="card mb-3" style="max-height: 300px;">
                 <div class="row">
                     <div class="col-md-4 mt-3">
-                        <img src="{{ asset('uploads/images/annonces/')}}{{ annonce.image }}" class="images" style="max-height: 200px;">
+                        <img src="{{ asset('uploads/images/annonces/')}}{{ annonce.image }}" class="imagesannonce" style="max-height: 200px;">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
@@ -20,7 +20,7 @@
                                     <p class="mb-3 text-warning font-weight-bold">Type: {{ annonce.type }}</p>
                                 </div>
                                 <div class="col-4">
-                                    {% if is_granted("ROLE_USER") and user.id != annonce.user.id %}
+                                    {% if is_granted("ROLE_USER") and app.user.id != annonce.user.id %}
                                         {% for favoris in annonce.favoris %}
                                             {% if favoris.id == app.user.id %}
                                                 <a href="{{ path('retrait_favoris', {id: annonce.id}) }}"><ion-icon name="heart"></ion-icon>En favoris</a>
@@ -44,7 +44,7 @@
                                 <div class="col-2 mt-5">
                                     <a href="{{ path('annonce_show', {'id': annonce.id}) }}" class="button btn text-white">Voir</a>
                                 </div>
-                                {% if is_granted('IS_AUTHENTICATED_FULLY') and user.id == annonce.user.id %}
+                                {% if is_granted('IS_AUTHENTICATED_FULLY') and app.user.id == annonce.user.id %}
                                     <div class="col-2 mt-5">
                                         <a href="{{ path('annonce_edit', {'id': annonce.id}) }}" class="button btn text-white">Modifier</a>
                                     </div>
