@@ -133,7 +133,7 @@ class AppFixtures extends Fixture
         $annonce8->setPrix(20);
         $annonce8->setCategorie($this->getReference('categorie1'));
         $annonce8->setImage('talon.jpeg');
-        $annonce8->setDescription("Portés une seule fois");
+        $annonce8->setDescription("Portées une seule fois");
         $manager->persist($annonce8);
         $annonce8->setUser($this->getReference('user2'));
 

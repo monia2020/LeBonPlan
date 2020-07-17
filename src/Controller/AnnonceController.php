@@ -53,7 +53,7 @@ class AnnonceController extends AbstractController
     {
         if( !$this->getUser())
         {
-            $this->addFlash('error','Vous devez etre connecter pour acceder a cette page');
+            $this->addFlash('error','Vous devez etre connecté pour acceder a cette page');
 
             return $this->redirectToRoute('app_login');
         }
